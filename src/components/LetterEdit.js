@@ -1,4 +1,6 @@
 import React from 'react';
+//https://github.com/embiem/react-canvas-draw
+import CanvasDraw from "react-canvas-draw";
 
 export default class LetterEdit extends React.Component {
 
@@ -121,6 +123,10 @@ export default class LetterEdit extends React.Component {
             width: this.state.wrapperSize + 'px'
         };
 
+        return <div>
+            <CanvasDraw />
+        </div>
+        /*
         return <div 
             onContextMenu={(e)=> e.preventDefault()}
             className="letter-edit" 
@@ -130,5 +136,6 @@ export default class LetterEdit extends React.Component {
             onMouseUp={e => this.onMouseUp(e)}>
             {this.renderBoxes()}
         </div>;
+        */
     }
 }
