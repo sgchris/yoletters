@@ -1,0 +1,61 @@
+.header {
+  text-align: center;
+}
+
+.letter-box {
+  padding: 10px;
+  margin: 5px;
+  float: right;
+  border: 1px solid #AAA;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.letter-box-letter {
+  float: right;
+  padding: 10px;
+  font-size: 2em;
+}
+
+.letter-box-cipher-box-wrapper {
+  overflow: hidden;
+  background-color: aliceblue;
+  border: 1px solid #333;
+  margin: 10px;
+}
+
+.letter-box-cipher-dot {
+  float: right;
+  padding: 0;
+  margin: 0;
+}
+.letter-box-cipher-dot-selected {
+  background: #333;
+}
+
+
+
+
+
+
+
+
+.letter-edit {
+  padding: 0;
+  margin: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.letter-edit-box {
+  float: right;
+  margin: 0;
+  padding: 0;
+  border: 1px solid #DDD;
+}
+.letter-edit-box:hover {
+  border: 1px solid #222;
+}
+.letter-edit-box-selected {
+  background-color: #333;
+}
