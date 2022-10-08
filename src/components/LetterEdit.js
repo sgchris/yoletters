@@ -24,22 +24,33 @@ export default class LetterEdit extends React.Component {
 
     canvasTools = {
         save: () => {
+            debugger;
             // margin size from the left and the right points of the letter
             const marginSize = 10;
 
             // get the leftest and the rightest points of the letter
             let margins = this.canvasTools._findMargins();
 
-            // create new canvas with new dims
-            let newCanvas = document.createElement('canvas'),
-                newCanvasCtx = newCanvas.getContext('2d');
+            let drawingDims = this.canvasRef.current.canvas.drawing.getBoundingClientRect();
+            const drawingWidth = drawingDims.width;
+            const drawingHeight = drawingDims.height;
+            let gridDims = this.canvasRef.current.canvas.grid.getBoundingClientRect();
+            const gridWidth = gridDims.width;
+            const gridHeight = gridDims.height;
 
+            // create new canvas with new dims
+            let newCanvas = document.createElement('canvas')
+            newCanvas.width = gridWidth;
+            newCanvas.height = gridHeight;
+            let newCanvasCtx = newCanvas.getContext('2d');
+
+            // draw the image into the context
             let letterWidth = margins['rightest'] - margins['leftest'];
             let newCanvasWidth = letterWidth + (2 * marginSize);
             console.log('this.canvasRef.current', this.canvasRef.current.canvas.drawing);
             newCanvasCtx.drawImage(this.canvasRef.current.canvas.drawing, 
-                margins['leftest'] - marginSize, 0,
-                newCanvasWidth, 400)
+                marginSize, marginSize,
+                drawingWidth, drawingHeight);
 
             let img = new Image();
             img.setAttribute('width', newCanvasWidth);
