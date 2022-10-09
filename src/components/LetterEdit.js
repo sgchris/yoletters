@@ -10,7 +10,7 @@ export default class LetterEdit extends React.Component {
         this.canvasRef = React.createRef();
 
         this.onCanvasChange = props.onCanvasChange || function(){};
-        this.onSave = props.onSave || function(){};
+        this.onSave = props.onSave || function(dataUrl){};
         
         this.state = {
             // wrapper size (width/height.. it's a square) as a parameter
@@ -27,7 +27,6 @@ export default class LetterEdit extends React.Component {
             // get the margins of the letter inside the drawing leftest and the rightest points of the letter
             let margins = this.canvasTools._findMargins();
             let letterWidth = margins['rightest'] - margins['leftest'];
-            let letterHeight = margins['highest'] - margins['lowest'];
 
             // get drawing canvas dims
             let gridDims = this.canvasRef.current.canvas.grid.getBoundingClientRect();
@@ -48,17 +47,19 @@ export default class LetterEdit extends React.Component {
                 letterWidth, gridHeight);
 
             // create an image out of it
+            /*
             let img = new Image();
             img.style="border: 1px solid #333";
             img.setAttribute('width', letterWidth);
             img.setAttribute('height', gridHeight);
             img.src = newCanvas.toDataURL("image/png");
             document.body.appendChild(img);
+            */
+
+            this.onSave(newCanvas.toDataURL("image/png"));
         },
         undo: () => this.canvasRef.current.undo(),
-        clear: () => {
-            this.canvasRef.current.clear();
-        },
+        clear: () => this.canvasRef.current.clear(),
 
         _findMargins: () => {
             let lines = this.canvasRef.current.lines;
