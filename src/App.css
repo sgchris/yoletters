@@ -9,14 +9,16 @@
   border: 1px solid #AAA;
   border-radius: 5px;
   overflow: hidden;
+  width: 120px;
+  text-align: center;
 }
 .letter-box-letter {
-  text-align: center;
   padding: 10px;
   font-size: 2em;
 }
 .letter-box-image {
   cursor: pointer;
+  display: inline-block;
 }
 
 

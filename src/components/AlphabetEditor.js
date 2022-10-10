@@ -18,7 +18,7 @@ export default class AlphabetEditor extends React.Component {
         };
     }
 
-    // generate array with all letters object
+    // generate array with all letter objects
     getAllLetters() {
         // check letters, create if empty
         let propsLetters = [];
@@ -33,22 +33,48 @@ export default class AlphabetEditor extends React.Component {
         return propsLetters;
     }
 
-    letterImageClick(letter) {
-        console.log('clicked', letter);
+    letterImageClick(letterObj) {
+        // find the letter object
+        for (let i=0; i<this.state.letters.length; i++) {
+            if (this.state.letters[i].letter == letterObj.letter) {
+                this.setState({
+                    editLetterIndex: i
+                });
+
+                break;
+            }
+        }
+    }
+
+    saveImage(imgData, imgUrl) {
+        console.log('saveImage', imgData, imgUrl);
+        let currentIndex = this.state.editLetterIndex;
+        this.setState({
+            letters: this.state.letters.map((letterObj, i) => {
+                return {
+                    letter: letterObj.letter,
+                    imageData: (i === currentIndex ? imgData : letterObj.imageData),
+                    imageUrl: (i === currentIndex ? imgUrl : letterObj.imageUrl),
+                };
+            })
+        });
     }
 
     getLetters() {
+        console.log('rendering letters', this.state);
         return <div>
             {this.state.letters.map(letterObj => {
-                return <LetterBox 
+                console.log('inside letters map', letterObj);
+                return <LetterBox key={letterObj.letter + letterObj.imageUrl}
                     letter={letterObj.letter} 
                     imageUrl={letterObj.imageUrl} 
-                    onImageClick={e => this.letterImageClick(letterObj.letter)} />
+                    onImageClick={e => this.letterImageClick(letterObj)} />
             })}
         </div>
     }
 
     render() {
+        console.log('rendering', this.state)
         let lettersSection = this.getLetters();
         return <div className="alphabeteditor-wrapper">
             <div className='alphabeteditor-letters'>
@@ -56,7 +82,9 @@ export default class AlphabetEditor extends React.Component {
             </div>
             <div className='alphabeteditor-letteredit'>
                 <LetterEdit wrapperSize="400" 
-                    imageData={this.state.letters[this.state.editLetterIndex].imageData} />
+                    letter={this.state.letters[this.state.editLetterIndex].letter}
+                    imageData={this.state.letters[this.state.editLetterIndex].imageData}
+                    onSave={(imgData, imgUrl) => this.saveImage(imgData, imgUrl)} />
             </div>
         </div>
     }

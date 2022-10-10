@@ -10,7 +10,7 @@ export default class LetterEdit extends React.Component {
         this.canvasRef = React.createRef();
 
         this.onCanvasChange = props.onCanvasChange || function(){};
-        this.onSave = props.onSave || function(dataUrl){};
+        this.onSave = props.onSave || function(imageData, dataUrl){};
         
         this.state = {
             // wrapper size (width/height.. it's a square) as a parameter
@@ -46,7 +46,7 @@ export default class LetterEdit extends React.Component {
                 0, 0,
                 letterWidth, gridHeight);
             
-            this.onSave(newCanvas.toDataURL("image/png"));
+            this.onSave(this.canvasRef.current.getSaveData(), newCanvas.toDataURL("image/png"));
         },
         undo: () => this.canvasRef.current.undo(),
         clear: () => this.canvasRef.current.clear(),
