@@ -47,7 +47,6 @@ export default class AlphabetEditor extends React.Component {
     }
 
     saveImage(imgData, imgUrl) {
-        console.log('saveImage', imgData, imgUrl);
         let currentIndex = this.state.editLetterIndex;
         this.setState({
             letters: this.state.letters.map((letterObj, i) => {
@@ -61,10 +60,8 @@ export default class AlphabetEditor extends React.Component {
     }
 
     getLetters() {
-        console.log('rendering letters', this.state);
         return <div>
             {this.state.letters.map(letterObj => {
-                console.log('inside letters map', letterObj);
                 return <LetterBox key={letterObj.letter + letterObj.imageUrl}
                     letter={letterObj.letter} 
                     imageUrl={letterObj.imageUrl} 
@@ -74,14 +71,14 @@ export default class AlphabetEditor extends React.Component {
     }
 
     render() {
-        console.log('rendering', this.state)
         let lettersSection = this.getLetters();
         return <div className="alphabeteditor-wrapper">
             <div className='alphabeteditor-letters'>
                 {lettersSection}
             </div>
             <div className='alphabeteditor-letteredit'>
-                <LetterEdit wrapperSize="400" 
+                <LetterEdit key={this.state.editLetterIndex}
+                    wrapperSize="400" 
                     letter={this.state.letters[this.state.editLetterIndex].letter}
                     imageData={this.state.letters[this.state.editLetterIndex].imageData}
                     onSave={(imgData, imgUrl) => this.saveImage(imgData, imgUrl)} />

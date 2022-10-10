@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 //https://github.com/embiem/react-canvas-draw
 import CanvasDraw from "react-canvas-draw";
 
@@ -73,7 +73,6 @@ export default class LetterEdit extends React.Component {
                 });
             });
 
-            console.log('leftest', leftest, 'rightest', rightest);
             return {
                 leftest: leftest - boundery, 
                 rightest: rightest + boundery,
@@ -97,8 +96,9 @@ export default class LetterEdit extends React.Component {
                 </li>
             </ul>
             <CanvasDraw ref={this.canvasRef} 
+                saveData={this.state.imageData || null}
                 onChange={e => this.onCanvasChange(e)} 
-                canvasWidth={this.state.wrapperSize}/>
+                canvasWidth={this.state.wrapperSize} />
         </div>
     }
 }
