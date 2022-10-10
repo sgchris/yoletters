@@ -5,7 +5,6 @@ export default class LetterBox extends React.Component {
     
     constructor(props) {
         super(props);
-        console.log('letterbox', props);
 
         this.onImageClick = props.onImageClick || function(){};
         
@@ -21,7 +20,6 @@ export default class LetterBox extends React.Component {
     }
 
     render() {
-        console.log('letterbox rendering2', this.state);
         return <div className="letter-box">
             <div className="letter-box-letter">{this.state.letter}</div>
             <div className="letter-box-image" onClick={e => this.onImageClick()}>

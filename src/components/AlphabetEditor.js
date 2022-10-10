@@ -47,6 +47,20 @@ export default class AlphabetEditor extends React.Component {
     }
 
     saveImage(imgData, imgUrl) {
+        if (!imgData) {
+            return;
+        }
+
+        try {
+            let imgDataObj = JSON.parse(imgData);
+            if (!imgDataObj.lines || imgDataObj.lines.length === 0) {
+                return;
+            }
+        } catch {
+            console.error('imgData is not parsable', imgData);
+            return;
+        }
+        
         let currentIndex = this.state.editLetterIndex;
         this.setState({
             letters: this.state.letters.map((letterObj, i) => {
