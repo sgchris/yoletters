@@ -10,33 +10,14 @@
   border-radius: 5px;
   overflow: hidden;
 }
-
 .letter-box-letter {
-  float: right;
+  text-align: center;
   padding: 10px;
   font-size: 2em;
 }
-
-.letter-box-cipher-box-wrapper {
-  overflow: hidden;
-  background-color: aliceblue;
-  border: 1px solid #333;
-  margin: 10px;
+.letter-box-image {
+  cursor: pointer;
 }
-
-.letter-box-cipher-dot {
-  float: right;
-  padding: 0;
-  margin: 0;
-}
-.letter-box-cipher-dot-selected {
-  background: #333;
-}
-
-
-
-
-
 
 
 
@@ -58,4 +39,18 @@
 }
 .letter-edit-box-selected {
   background-color: #333;
+}
+
+
+.alphabeteditor-wrapper {
+  overflow: hidden;
+}
+.alphabeteditor-wrapper .alphabeteditor-letters {
+  float: right;
+  width: 50%;
+}
+.alphabeteditor-wrapper .alphabeteditor-letteredit {
+  width: 400px;
+  height: 400px;
+  float: left;
 }

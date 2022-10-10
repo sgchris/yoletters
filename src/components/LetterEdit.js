@@ -15,10 +15,10 @@ export default class LetterEdit extends React.Component {
         this.state = {
             // wrapper size (width/height.. it's a square) as a parameter
             // (to avoid dealing with sizes calculations)
-            wrapperSize: props.wrapperSize || 600,
+            wrapperSize: props.wrapperSize || 400,
 
-            // initially filled dots in the cipher map
-            selectedBoxes: props.dots || [],
+            // the existing image data if exists
+            imageData: props.imageData || '',
         };
     }
 
@@ -45,17 +45,7 @@ export default class LetterEdit extends React.Component {
                 letterWidth, gridHeight,
                 0, 0,
                 letterWidth, gridHeight);
-
-            // create an image out of it
-            /*
-            let img = new Image();
-            img.style="border: 1px solid #333";
-            img.setAttribute('width', letterWidth);
-            img.setAttribute('height', gridHeight);
-            img.src = newCanvas.toDataURL("image/png");
-            document.body.appendChild(img);
-            */
-
+            
             this.onSave(newCanvas.toDataURL("image/png"));
         },
         undo: () => this.canvasRef.current.undo(),
@@ -106,7 +96,9 @@ export default class LetterEdit extends React.Component {
                     <button onClick={e => this.canvasTools.clear()} className="btn btn-danger">Clear</button>
                 </li>
             </ul>
-            <CanvasDraw ref={this.canvasRef} onChange={e => this.onCanvasChange(e)} />
+            <CanvasDraw ref={this.canvasRef} 
+                onChange={e => this.onCanvasChange(e)} 
+                canvasWidth={this.state.wrapperSize}/>
         </div>
     }
 }
