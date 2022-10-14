@@ -12,6 +12,8 @@ export default class LetterBox extends React.Component {
             // the hebrew letter
             letter: props.letter || "א",
 
+            isSelected: props.isSelected || false,
+
             // the image
             imageUrl: props.imageUrl || this.defaultImageUrl,
 
@@ -20,7 +22,8 @@ export default class LetterBox extends React.Component {
     }
 
     render() {
-        return <div className="letter-box">
+        const letterBoxSelectedClassName = this.state.isSelected ? 'letter-box-selected' : '';
+        return <div className={`letter-box ${letterBoxSelectedClassName}`}>
             <div className="letter-box-letter">{this.state.letter}</div>
             <div className="letter-box-image" onClick={e => this.onImageClick()}>
                 <img alt={this.state.imageUrl} 

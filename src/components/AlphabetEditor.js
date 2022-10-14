@@ -60,7 +60,7 @@ export default class AlphabetEditor extends React.Component {
             console.error('imgData is not parsable', imgData);
             return;
         }
-        
+         
         let currentIndex = this.state.editLetterIndex;
         this.setState({
             letters: this.state.letters.map((letterObj, i) => {
@@ -75,8 +75,9 @@ export default class AlphabetEditor extends React.Component {
 
     getLetters() {
         return <div>
-            {this.state.letters.map(letterObj => {
-                return <LetterBox key={letterObj.letter + letterObj.imageUrl}
+            {this.state.letters.map((letterObj, i) => {
+                return <LetterBox key={letterObj.letter + letterObj.imageUrl + (this.state.editLetterIndex == i)}
+                    isSelected={this.state.editLetterIndex == i}
                     letter={letterObj.letter} 
                     imageUrl={letterObj.imageUrl} 
                     onImageClick={e => this.letterImageClick(letterObj)} />
