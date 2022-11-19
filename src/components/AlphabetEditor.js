@@ -9,6 +9,12 @@ export default class AlphabetEditor extends React.Component {
         super(props);
 
         let lettersArray = props.letters || this.getAllLetters();
+        this.onLettersUpdate = props.onLettersUpdate || function(){};
+
+        // write initial letters back
+        if (!props.letters) {
+            this.onLettersUpdate(lettersArray);
+        }
 
         this.state = {
             // e.g. [{letter: 'א', imageUrl: 'https://...'}, ]
@@ -62,15 +68,15 @@ export default class AlphabetEditor extends React.Component {
         }
          
         let currentIndex = this.state.editLetterIndex;
-        this.setState({
-            letters: this.state.letters.map((letterObj, i) => {
-                return {
-                    letter: letterObj.letter,
-                    imageData: (i === currentIndex ? imgData : letterObj.imageData),
-                    imageUrl: (i === currentIndex ? imgUrl : letterObj.imageUrl),
-                };
-            })
+        let newLetters = this.state.letters.map((letterObj, i) => {
+            return {
+                letter: letterObj.letter,
+                imageData: (i === currentIndex ? imgData : letterObj.imageData),
+                imageUrl: (i === currentIndex ? imgUrl : letterObj.imageUrl),
+            };
         });
+        this.onLettersUpdate(newLetters);
+        this.setState({letters: newLetters});
     }
 
     getLetters() {
